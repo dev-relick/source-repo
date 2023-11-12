@@ -1,0 +1,6 @@
+
+# ファイルに"Hello, World!"を書き出すRubyプログラム
+File.open("output.txt", "w") do |file|
+ file.puts "Hello, World!"
+end
+
