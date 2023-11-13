@@ -1,0 +1,17 @@
+
+package main
+
+import (
+	"io/ioutil"
+	"log"
+)
+
+func main() {
+	content := []byte("Hello, world!\n")
+
+	err := ioutil.WriteFile("output.txt", content, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
