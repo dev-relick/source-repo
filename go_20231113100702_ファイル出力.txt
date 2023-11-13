@@ -1,0 +1,27 @@
+
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// ファイルを開く（存在しない場合は新規に作成）
+	file, err := os.Create("output.txt")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+
+	// ファイルに文字列を書き込む
+	_, err = file.WriteString("Hello, World!\n")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println("File written successfully")
+}
+
