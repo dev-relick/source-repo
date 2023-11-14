@@ -1,0 +1,23 @@
+
+import threading
+import time
+
+def print_numbers():
+ for i in range(5):
+ time.sleep(1)
+ print(f"Number from thread A: {i}")
+
+def print_letters():
+ for letter in 'abcde':
+ time.sleep(1.5)
+ print(f"Letter from thread B: {letter}")
+
+thread_a = threading.Thread(target=print_numbers)
+thread_b = threading.Thread(target=print_letters)
+
+thread_a.start()
+thread_b.start()
+
+thread_a.join()
+thread_b.join()
+
