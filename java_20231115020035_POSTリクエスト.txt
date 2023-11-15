@@ -1,0 +1,44 @@
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+public class PostRequestExample {
+ public static void main(String[] args) {
+ try {
+ // URLとPOSTリクエストのパラメータ
+ String queryUrl = "https://yourapi.com/post";
+ String urlParameters = "param1=value1&param2=value2";
+
+ // HTTP接続を開始する
+ URL url = new URL(queryUrl);
+ HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+ conn.setRequestMethod("POST");
+
+ // リクエスト用ヘッダの設定
+ conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+ conn.setRequestProperty("charset", "utf-8");
+ conn.setRequestProperty("Content-Length", Integer.toString(urlParameters.getBytes().length));
+
+ // POSTデータ送信を許可する
+ conn.setDoOutput(true);
+
+ // POSTデータの送信
+ try (OutputStream os = conn.getOutputStream()) {
+ os.write(urlParameters.getBytes(StandardCharsets.UTF_8));
+ }
+
+ // レスポンスコードの委託
+ int responseCode = conn.getResponseCode();
+ System.out.println("Response Code : " + responseCode);
+
+ // HTTP接続を閉じる
+ conn.disconnect();
+
+ } catch (Exception e) {
+ e.printStackTrace();
+ }
+ }
+}
+
